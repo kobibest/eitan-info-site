@@ -1,0 +1,21 @@
+# איתן (EITAN CRM)
+
+> איתן היא מערכת CRM ישראלית ליועצי משכנתאות: ניהול לקוחות ותיקי משכנתא, ניהול משימות עם תלויות וציר זמן, סימולטור משכנתא מבוסס נתוני ריבית עדכניים של בנק ישראל, חתימה דיגיטלית מרובת צדדים ואינטגרציית וואטסאפ עסקית. המערכת פועלת בדפדפן ללא התקנה, נבנתה על ידי יועץ משכנתאות פעיל סביב תהליך העבודה מול הבנקים בישראל, והמידע נשמר בשרתים באיחוד האירופי (פרנקפורט).
+
+EITAN is an Israeli CRM system for licensed mortgage advisors (יועצי משכנתאות). It centralizes client and case management, task management with dependencies and timelines, a mortgage simulator based on up-to-date Bank of Israel interest-rate data, multi-party digital signatures (clients, spouses, guarantors), and business WhatsApp integration. It runs in the browser with no installation, was built by an active mortgage advisor around the real Israeli bank workflow, and stores data on servers in the EU (Frankfurt).
+
+- קהל יעד: יועצי משכנתאות מורשים בישראל — עצמאיים וצוותי ייעוץ
+- התחלת עבודה / הרשמה: https://www.m-eitan.co.il/register
+- כניסה למערכת: https://www.m-eitan.co.il/login
+- אתר המערכת: https://www.m-eitan.co.il
+
+## עמודים
+
+- [דף הבית — מערכת CRM ליועצי משכנתאות](https://info.m-eitan.co.il/): סקירת היכולות המלאה ושאלות נפוצות
+- [אודות איתן](https://info.m-eitan.co.il/about/): הסיפור והגישה מאחורי המערכת
+
+## מדריכים
+
+- [איך בוחרים מערכת CRM ליועצי משכנתאות](https://info.m-eitan.co.il/guides/choosing-mortgage-crm/): יכולות חובה, שאלות לספק וטעויות נפוצות
+- [אקסל מול מערכת ייעודית לניהול תיקי משכנתא](https://info.m-eitan.co.il/guides/excel-vs-crm/): השוואה מעשית ותוכנית מעבר
+- [סימולטור משכנתא ליועצים](https://info.m-eitan.co.il/guides/mortgage-simulator/): למה חשוב לעבוד עם נתוני בנק ישראל

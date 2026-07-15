@@ -1,0 +1,657 @@
+---
+import CubeLogo from '../components/CubeLogo.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Path relative to site root, e.g. '/' or '/guides/excel-vs-crm/' */
+  path: string;
+  ogType?: string;
+}
+
+const siteUrl = 'https://info.m-eitan.co.il';
+const registerUrl = 'https://www.m-eitan.co.il/register';
+const loginUrl = 'https://www.m-eitan.co.il/login';
+
+const { title, description, path, ogType = 'website' } = Astro.props;
+const canonical = `${siteUrl}${path}`;
+
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${siteUrl}/#organization`,
+  name: 'איתן',
+  alternateName: 'EITAN CRM',
+  slogan: 'לחשוב קדימה',
+  description:
+    'איתן היא מערכת CRM ישראלית ליועצי משכנתאות: ניהול לקוחות ותיקי משכנתא, סימולטור מבוסס נתוני בנק ישראל, חתימה דיגיטלית ואינטגרציית וואטסאפ.',
+  url: siteUrl,
+  logo: `${siteUrl}/apple-touch-icon.png`,
+  image: `${siteUrl}/og-image.png`,
+  sameAs: ['https://www.m-eitan.co.il'],
+  areaServed: {
+    '@type': 'Country',
+    name: 'ישראל',
+  },
+};
+
+const webSiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  name: 'איתן — מערכת CRM ליועצי משכנתאות',
+  url: siteUrl,
+  inLanguage: 'he',
+  publisher: { '@id': `${siteUrl}/#organization` },
+};
+---
+
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#1E3A8A" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="איתן CRM" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}/og-image.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+
+    <link
+      rel="preload"
+      href="/fonts/heebo-hebrew.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preload" href="/fonts/heebo-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(webSiteLd)} />
+    <slot name="head" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="איתן — דף הבית">
+          <CubeLogo size={38} />
+          <span class="brand-text">
+            <span class="brand-mark">איתן</span>
+            <span class="brand-sub">CRM ליועצי משכנתאות</span>
+          </span>
+        </a>
+        <nav class="header-nav" aria-label="ניווט ראשי">
+          <a href="/#features">מה יש במערכת</a>
+          <a href="/guides/">מדריכים</a>
+          <a href="/about/">אודות</a>
+          <a href="/#faq">שאלות נפוצות</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn-outline" href={loginUrl}>כניסה למערכת</a>
+          <a class="btn btn-primary" href={registerUrl}>פתיחת חשבון</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <CubeLogo size={32} />
+          <span>איתן <span class="footer-tagline">— לחשוב קדימה</span></span>
+        </div>
+        <nav class="footer-links" aria-label="קישורים">
+          <a href={registerUrl}>פתיחת חשבון</a>
+          <a href={loginUrl}>כניסה למערכת</a>
+          <a href="/guides/">מדריכים ליועצי משכנתאות</a>
+          <a href="/about/">אודות איתן</a>
+          <a href="https://www.m-eitan.co.il">www.m-eitan.co.il</a>
+        </nav>
+        <p class="footer-copy">© {new Date().getFullYear()} איתן — מערכת CRM ליועצי משכנתאות</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  @font-face {
+    font-family: 'Heebo';
+    font-style: normal;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url('/fonts/heebo-hebrew.woff2') format('woff2');
+    unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+  }
+
+  @font-face {
+    font-family: 'Heebo';
+    font-style: normal;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url('/fonts/heebo-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+      U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  @font-face {
+    font-family: 'Heebo';
+    font-style: normal;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url('/fonts/heebo-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+      U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+      U+2C60-2C7F, U+A720-A7FF;
+  }
+
+  :root {
+    --navy: #1e3a8a;
+    --navy-dark: #172b66;
+    --navy-deep: #101f4d;
+    --amber: #f0a31d;
+    --amber-dark: #d98e0b;
+    --amber-soft: #fdf3df;
+    --ink: #1b2540;
+    --muted: #56658a;
+    --bg: #f7f9fd;
+    --card: #ffffff;
+    --line: #e2e8f5;
+    --ring: rgba(240, 163, 29, 0.55);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Heebo', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.65;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  a {
+    color: var(--navy);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 10px 22px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+      box-shadow 0.15s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .btn-lg {
+    padding: 14px 34px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+  }
+
+  .btn-primary {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: var(--navy-dark);
+  }
+
+  .btn-accent {
+    background: var(--amber);
+    color: var(--navy-deep);
+    font-weight: 700;
+    box-shadow: 0 8px 20px -8px rgba(240, 163, 29, 0.65);
+  }
+
+  .btn-accent:hover {
+    background: var(--amber-dark);
+    box-shadow: 0 10px 22px -8px rgba(217, 142, 11, 0.7);
+  }
+
+  .btn-outline {
+    border-color: #cbd6ec;
+    color: var(--navy);
+    background: #fff;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--navy);
+  }
+
+  .btn-ghost {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+    background: transparent;
+  }
+
+  .btn-ghost:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-block: 12px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .brand-mark {
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+
+  .brand-sub {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+
+  .header-nav {
+    display: flex;
+    gap: 26px;
+    margin-inline-start: auto;
+  }
+
+  .header-nav a {
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 0.98rem;
+  }
+
+  .header-nav a:hover {
+    color: var(--navy);
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  /* Shared section typography */
+  section h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.15rem);
+    font-weight: 800;
+    color: var(--navy-deep);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .kicker {
+    text-align: center;
+    color: var(--amber-dark);
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--muted);
+    max-width: 620px;
+    margin: 0 auto 40px;
+    font-size: 1.05rem;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* CTA panel (shared by home + articles) */
+  .bottom-cta {
+    padding-block: 8px 90px;
+  }
+
+  .cta-panel {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(150deg, var(--navy-dark) 0%, var(--navy) 55%, #27479b 100%);
+    color: #fff;
+    text-align: center;
+    border-radius: 24px;
+    padding: 64px 32px;
+    box-shadow: 0 24px 50px -24px rgba(16, 31, 77, 0.5);
+  }
+
+  .cta-watermark {
+    position: absolute;
+    inset-inline-start: -70px;
+    bottom: -90px;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  .cta-panel h2 {
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .cta-panel p {
+    color: #ccd9f2;
+    margin-bottom: 30px;
+    font-size: 1.08rem;
+  }
+
+  .cta-panel .cta-row {
+    position: relative;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    padding-block: 18px 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .breadcrumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .breadcrumbs li + li::before {
+    content: '‹';
+    margin-inline-end: 6px;
+    color: #a8b4d4;
+  }
+
+  .breadcrumbs a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--navy);
+  }
+
+  /* Article prose */
+  .article-hero {
+    padding-block: 30px 10px;
+    text-align: center;
+  }
+
+  .article-hero h1 {
+    font-size: clamp(1.8rem, 4.5vw, 2.7rem);
+    font-weight: 900;
+    color: var(--navy-deep);
+    line-height: 1.25;
+    max-width: 820px;
+    margin: 0 auto 14px;
+  }
+
+  .article-hero .article-lead {
+    color: var(--muted);
+    font-size: 1.12rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .prose {
+    max-width: 760px;
+    margin-inline: auto;
+    padding-block: 36px 64px;
+    font-size: 1.05rem;
+  }
+
+  .prose h2 {
+    text-align: start;
+    font-size: 1.5rem;
+    margin: 40px 0 14px;
+  }
+
+  .prose h3 {
+    color: var(--navy-dark);
+    font-size: 1.18rem;
+    font-weight: 700;
+    margin: 28px 0 10px;
+  }
+
+  .prose p {
+    margin-bottom: 16px;
+  }
+
+  .prose ul,
+  .prose ol {
+    margin: 0 0 18px;
+    padding-inline-start: 24px;
+  }
+
+  .prose li {
+    margin-bottom: 8px;
+  }
+
+  .prose strong {
+    color: var(--navy-dark);
+  }
+
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 26px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 0.98rem;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 12px 16px;
+    text-align: start;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  .prose thead th {
+    background: var(--navy);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .prose tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .prose .tip {
+    background: var(--amber-soft);
+    border: 1px solid #f3ddab;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+
+  /* Cards grid (features / guides) */
+  .card-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px 26px;
+    box-shadow: 0 1px 2px rgba(16, 31, 77, 0.04);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .card:hover {
+    border-color: #f1cd8b;
+    box-shadow: 0 14px 30px -14px rgba(16, 31, 77, 0.18);
+    transform: translateY(-2px);
+  }
+
+  /* Footer */
+  .site-footer {
+    background: var(--navy-deep);
+    color: #9fb0d6;
+    padding-block: 34px;
+    font-size: 0.92rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .footer-tagline {
+    color: var(--amber);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: #c3d0ec;
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: #fff;
+  }
+
+  .footer-copy {
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 18px;
+    margin-top: 6px;
+    color: #8497c4;
+    font-size: 0.85rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 820px) {
+    .header-nav {
+      display: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .header-inner {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .header-actions {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-lg {
+      width: 100%;
+      text-align: center;
+    }
+
+    .cta-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .footer-inner {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+</style>

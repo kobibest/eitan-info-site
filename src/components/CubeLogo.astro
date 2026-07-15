@@ -1,0 +1,31 @@
+---
+// The brand mark: an isometric 2×2 cube, navy with amber accents.
+// Geometry ratio is 216:248 (w:h); `size` sets the height in px.
+const { size = 40, class: className } = Astro.props;
+const h = size;
+const w = Math.round((size * 216) / 248);
+---
+
+<svg
+  class={className}
+  width={w}
+  height={h}
+  viewBox="-108 -4 216 248"
+  aria-hidden="true"
+  focusable="false"
+>
+  <g stroke="#fff" stroke-width="7" stroke-linejoin="round">
+    <polygon fill="#1E3A8A" points="0,0 51.96,30 0,60 -51.96,30"></polygon>
+    <polygon fill="#1E3A8A" points="51.96,30 103.92,60 51.96,90 0,60"></polygon>
+    <polygon fill="#1E3A8A" points="-51.96,30 0,60 -51.96,90 -103.92,60"></polygon>
+    <polygon fill="#F0A31D" points="0,60 51.96,90 0,120 -51.96,90"></polygon>
+    <polygon fill="#1E3A8A" points="0,120 51.96,90 51.96,150 0,180"></polygon>
+    <polygon fill="#1E3A8A" points="51.96,90 103.92,60 103.92,120 51.96,150"></polygon>
+    <polygon fill="#F0A31D" points="0,180 51.96,150 51.96,210 0,240"></polygon>
+    <polygon fill="#1E3A8A" points="51.96,150 103.92,120 103.92,180 51.96,210"></polygon>
+    <polygon fill="#1E3A8A" points="0,120 -51.96,90 -51.96,150 0,180"></polygon>
+    <polygon fill="#1E3A8A" points="-51.96,90 -103.92,60 -103.92,120 -51.96,150"></polygon>
+    <polygon fill="#F0A31D" points="0,180 -51.96,150 -51.96,210 0,240"></polygon>
+    <polygon fill="#1E3A8A" points="-51.96,150 -103.92,120 -103.92,180 -51.96,210"></polygon>
+  </g>
+</svg>

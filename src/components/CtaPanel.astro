@@ -1,0 +1,25 @@
+---
+import CubeLogo from './CubeLogo.astro';
+
+const registerUrl = 'https://www.m-eitan.co.il/register';
+const loginUrl = 'https://www.m-eitan.co.il/login';
+
+const {
+  title = 'מוכנים להתחיל?',
+  text = 'המערכת פועלת בדפדפן, ללא התקנה. אפשר להתחיל לעבוד תוך דקות.',
+} = Astro.props;
+---
+
+<section class="bottom-cta">
+  <div class="container">
+    <div class="cta-panel">
+      <CubeLogo size={340} class="cta-watermark" />
+      <h2>{title}</h2>
+      <p>{text}</p>
+      <div class="cta-row">
+        <a class="btn btn-accent btn-lg" href={registerUrl}>פתיחת חשבון</a>
+        <a class="btn btn-ghost btn-lg" href={loginUrl}>כניסה למערכת</a>
+      </div>
+    </div>
+  </div>
+</section>

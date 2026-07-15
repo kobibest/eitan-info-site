@@ -1,0 +1,122 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaPanel from '../../components/CtaPanel.astro';
+
+const title = 'מדריכים ליועצי משכנתאות — ניהול תיקים, בחירת מערכת וכלי עבודה | איתן';
+const description =
+  'מדריכים מעשיים ליועצי משכנתאות: איך בוחרים מערכת CRM, אקסל מול מערכת ייעודית לניהול תיקי משכנתא, וסימולטור משכנתא מבוסס נתוני בנק ישראל.';
+
+const guides = [
+  {
+    href: '/guides/choosing-mortgage-crm/',
+    title: 'איך בוחרים מערכת CRM ליועצי משכנתאות?',
+    text: 'היכולות שחייבות להיות במערכת, שאלות שכדאי לשאול כל ספק, וטעויות נפוצות בבחירה — מדריך מלא ליועץ עצמאי ולצוות ייעוץ.',
+  },
+  {
+    href: '/guides/excel-vs-crm/',
+    title: 'אקסל מול מערכת ייעודית: איך כדאי לנהל תיקי משכנתא?',
+    text: 'הסימנים שאקסל כבר לא מספיק, השוואה מעשית בין שתי הדרכים, ותוכנית מעבר פשוטה שלא דורשת "פרויקט הגירה".',
+  },
+  {
+    href: '/guides/mortgage-simulator/',
+    title: 'סימולטור משכנתא ליועצים: למה נתוני בנק ישראל חשובים',
+    text: 'איך סימולציה על נתוני ריבית עדכניים משדרגת את בניית התמהיל, את המשא ומתן מול הבנקים ואת האמון של הלקוח.',
+  },
+];
+
+const crumbs = [
+  { name: 'ראשי', href: '/' },
+  { name: 'מדריכים', href: '/guides/' },
+];
+
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'מדריכים ליועצי משכנתאות',
+  url: 'https://info.m-eitan.co.il/guides/',
+  inLanguage: 'he',
+  publisher: { '@id': 'https://info.m-eitan.co.il/#organization' },
+  hasPart: guides.map((g) => ({
+    '@type': 'Article',
+    headline: g.title,
+    url: `https://info.m-eitan.co.il${g.href}`,
+  })),
+};
+---
+
+<Base title={title} description={description} path="/guides/">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(collectionLd)} />
+  </Fragment>
+
+  <Breadcrumbs items={crumbs} />
+
+  <section class="guides-index">
+    <div class="container">
+      <header class="article-hero">
+        <h1>מדריכים ליועצי משכנתאות</h1>
+        <p class="article-lead">
+          ידע מעשי לניהול העסק: בחירת מערכת, ניהול תיקים וכלי עבודה — מהניסיון של יועץ
+          משכנתאות פעיל.
+        </p>
+      </header>
+      <ul class="card-grid guides-grid">
+        {
+          guides.map((g) => (
+            <li class="card guide-card">
+              <a href={g.href}>
+                <h2>{g.title}</h2>
+                <p>{g.text}</p>
+                <span class="read-more">לקריאת המדריך ←</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaPanel />
+</Base>
+
+<style>
+  .guides-index {
+    padding-block: 10px 70px;
+  }
+
+  .guides-grid {
+    margin-top: 40px;
+  }
+
+  .guide-card {
+    padding: 0;
+  }
+
+  .guide-card a {
+    display: block;
+    padding: 28px 26px;
+    text-decoration: none;
+    height: 100%;
+  }
+
+  .guide-card h2 {
+    text-align: start;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy-dark);
+    margin-bottom: 8px;
+  }
+
+  .guide-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+
+  .read-more {
+    color: var(--amber-dark);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+</style>

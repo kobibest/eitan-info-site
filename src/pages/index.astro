@@ -1,40 +1,78 @@
 ---
+import Base from '../layouts/Base.astro';
+import CubeLogo from '../components/CubeLogo.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+
 const registerUrl = 'https://www.m-eitan.co.il/register';
 const loginUrl = 'https://www.m-eitan.co.il/login';
 const siteUrl = 'https://info.m-eitan.co.il/';
 
-const title = 'איתן — מערכת CRM ליועצי משכנתאות';
+const title = 'מערכת CRM ליועצי משכנתאות — איתן | ניהול תיקים, סימולטור וחתימה דיגיטלית';
 const description =
-  'מערכת CRM ישראלית ליועצי משכנתאות: ניהול לקוחות ותיקים, סימולטור משכנתא, חתימה דיגיטלית ואינטגרציית וואטסאפ — הכל במערכת אחת.';
+  'איתן — מערכת CRM ישראלית ליועצי משכנתאות: ניהול לקוחות ותיקי משכנתא, סימולטור משכנתא מבוסס נתוני בנק ישראל, חתימה דיגיטלית מרובת צדדים ואינטגרציית וואטסאפ. עובדת בדפדפן, ללא התקנה.';
 
 const features = [
   {
     title: 'ניהול תיקים ולקוחות',
     text: 'כל הלקוחות והתיקים במקום אחד — סטטוסים, מסמכים והיסטוריה מלאה של כל תיק.',
+    icon: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z',
   },
   {
     title: 'סימולטור משכנתא מבוסס נתוני בנק ישראל',
     text: 'בניית תמהילים והשוואת מסלולים על בסיס נתוני ריבית עדכניים של בנק ישראל.',
+    icon: 'M4 20h16 M7 20v-6 M12 20V9 M17 20V4',
   },
   {
     title: 'חתימה דיגיטלית מרובת צדדים',
     text: 'החתמת לקוחות, בני זוג וערבים על ייפוי כוח והסכמים — מרחוק ומכל מכשיר.',
+    icon: 'M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z',
   },
   {
     title: 'אינטגרציית WhatsApp עסקית',
     text: 'שליחת עדכונים, תזכורות ומסמכים ללקוחות ישירות מהמערכת, בערוץ שהם באמת קוראים.',
+    icon: 'M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z',
   },
   {
     title: 'ניהול משימות עם תלויות וציר זמן',
     text: 'תכנון שלבי התיק על ציר זמן, עם תלויות בין משימות כדי ששום שלב לא יתפספס.',
+    icon: 'M9 11l3 3L22 4 M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11',
   },
   {
     title: 'נבנתה על ידי יועץ משכנתאות פעיל',
     text: 'המערכת עוצבה סביב תהליך העבודה האמיתי מול הבנקים בישראל — לא תבנית גנרית.',
+    icon: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+  },
+];
+
+const trustChips = [
+  'עובד בדפדפן — ללא התקנה',
+  'נתוני ריבית עדכניים של בנק ישראל',
+  'המידע נשמר בשרתים באיחוד האירופי',
+];
+
+const guides = [
+  {
+    href: '/guides/choosing-mortgage-crm/',
+    title: 'איך בוחרים מערכת CRM ליועצי משכנתאות?',
+    text: 'המדריך המלא: היכולות שחייבות להיות במערכת, שאלות לספק וטעויות נפוצות בבחירה.',
+  },
+  {
+    href: '/guides/excel-vs-crm/',
+    title: 'אקסל מול מערכת ייעודית לניהול תיקי משכנתא',
+    text: 'מתי אקסל מפסיק להספיק, מה ההבדל בפועל, ואיך עוברים בלי לאבד מידע.',
+  },
+  {
+    href: '/guides/mortgage-simulator/',
+    title: 'סימולטור משכנתא ליועצים — למה נתוני בנק ישראל חשובים',
+    text: 'איך סימולטור מבוסס נתונים עדכניים משדרג את בניית התמהיל ואת האמון של הלקוח.',
   },
 ];
 
 const faqs = [
+  {
+    q: 'מה זו מערכת CRM ליועצי משכנתאות?',
+    a: 'מערכת ניהול ייעודית לעסק של יועץ משכנתאות: ניהול לקוחות ותיקים, מעקב אחר שלבי התהליך מול הבנקים, מסמכים, משימות וכלי עבודה כמו סימולטור משכנתא וחתימה דיגיטלית — הכל במקום אחד במקום אקסל, וואטסאפ ותיקיות מפוזרות.',
+  },
   {
     q: 'למי מיועדת מערכת איתן?',
     a: 'ליועצי משכנתאות מורשים בישראל, עצמאיים וצוותי ייעוץ, לניהול לקוחות ותיקים במקום אחד.',
@@ -42,6 +80,10 @@ const faqs = [
   {
     q: 'מה כוללת המערכת?',
     a: 'ניהול לקוחות ותיקי משכנתא, ניהול משימות, סימולטור משכנתא מבוסס נתוני בנק ישראל, חתימה דיגיטלית ואינטגרציית וואטסאפ.',
+  },
+  {
+    q: 'האם המערכת מתאימה גם ליועץ משכנתאות עצמאי?',
+    a: 'כן. איתן נבנתה על ידי יועץ משכנתאות פעיל ומתאימה גם ליועץ עצמאי שמנהל את כל התיקים לבד וגם לצוות ייעוץ שעובד יחד על אותם לקוחות.',
   },
   {
     q: 'איך מתחילים?',
@@ -59,14 +101,17 @@ const softwareApplicationLd = {
   name: 'איתן CRM',
   alternateName: 'EITAN CRM',
   applicationCategory: 'BusinessApplication',
+  applicationSubCategory: 'CRM ליועצי משכנתאות',
   operatingSystem: 'Web',
   inLanguage: 'he',
   url: siteUrl,
   description,
+  featureList: features.map((f) => f.title),
   audience: {
     '@type': 'Audience',
     audienceType: 'יועצי משכנתאות בישראל',
   },
+  publisher: { '@id': 'https://info.m-eitan.co.il/#organization' },
 };
 
 const faqPageLd = {
@@ -83,311 +128,297 @@ const faqPageLd = {
 };
 ---
 
-<html lang="he" dir="rtl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={siteUrl} />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="he_IL" />
-    <meta property="og:url" content={siteUrl} />
-    <meta property="og:site_name" content="איתן CRM" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap"
-      rel="stylesheet"
-    />
-
+<Base title={title} description={description} path="/">
+  <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(softwareApplicationLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqPageLd)} />
-  </head>
+  </Fragment>
 
-  <body>
-    <header class="site-header">
-      <div class="container header-inner">
-        <div class="brand">
-          <span class="brand-mark">איתן</span>
-          <span class="brand-sub">CRM ליועצי משכנתאות</span>
-        </div>
-        <nav class="header-actions">
-          <a class="btn btn-outline" href={loginUrl}>כניסה למערכת</a>
-          <a class="btn btn-primary" href={registerUrl}>פתיחת חשבון</a>
-        </nav>
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <CubeLogo size={84} class="hero-logo" />
+      <p class="hero-badge">נבנתה על ידי יועץ משכנתאות פעיל</p>
+      <h1>מערכת CRM <span class="hl">ליועצי משכנתאות</span></h1>
+      <p class="hero-sub">
+        איתן מרכזת את כל העבודה של יועץ המשכנתאות — לקוחות, תיקים, משימות, סימולציות
+        וחתימות — במערכת אחת שנבנתה בישראל, על התהליך הישראלי.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-accent btn-lg" href={registerUrl}>פתיחת חשבון</a>
+        <a class="btn btn-outline btn-lg" href={loginUrl}>כניסה למערכת</a>
       </div>
-    </header>
+      <ul class="trust-chips">
+        {
+          trustChips.map((chip) => (
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M20 6L9 17l-5-5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              {chip}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 
-    <main>
-      <section class="hero">
-        <div class="container">
-          <h1>מערכת CRM ליועצי משכנתאות</h1>
-          <p class="hero-sub">
-            איתן מרכזת את כל העבודה של יועץ המשכנתאות — לקוחות, תיקים, משימות, סימולציות
-            וחתימות — במערכת אחת שנבנתה בישראל, על התהליך הישראלי.
-          </p>
-          <div class="cta-row">
-            <a class="btn btn-primary btn-lg" href={registerUrl}>פתיחת חשבון</a>
-            <a class="btn btn-ghost btn-lg" href={loginUrl}>כניסה למערכת</a>
-          </div>
-        </div>
-      </section>
+  <section class="features" id="features">
+    <div class="container">
+      <p class="kicker">היכולות של איתן</p>
+      <h2>מה יש במערכת</h2>
+      <p class="section-sub">כל מה שיועץ משכנתאות צריך כדי לנהל את העסק — במקום אחד.</p>
+      <ul class="card-grid">
+        {
+          features.map((f) => (
+            <li class="card feature-card">
+              <span class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d={f.icon}
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 
-      <section class="features">
-        <div class="container">
-          <h2>מה יש במערכת</h2>
-          <ul class="feature-grid">
-            {
-              features.map((f) => (
-                <li class="feature-card">
-                  <h3>{f.title}</h3>
-                  <p>{f.text}</p>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </section>
-
-      <section class="faq">
-        <div class="container">
-          <h2>שאלות נפוצות</h2>
-          <dl class="faq-list">
-            {
-              faqs.map(({ q, a }) => (
-                <div class="faq-item">
-                  <dt>{q}</dt>
-                  <dd>
-                    {q === 'איך מתחילים?' ? (
-                      <>
-                        נרשמים בכתובת{' '}
-                        <a href={registerUrl}>www.m-eitan.co.il/register</a>. המערכת פועלת
-                        בדפדפן, ללא התקנה.
-                      </>
-                    ) : (
-                      a
-                    )}
-                  </dd>
-                </div>
-              ))
-            }
-          </dl>
-        </div>
-      </section>
-
-      <section class="bottom-cta">
-        <div class="container">
-          <h2>מוכנים להתחיל?</h2>
-          <p>המערכת פועלת בדפדפן, ללא התקנה. אפשר להתחיל לעבוד תוך דקות.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary btn-lg" href={registerUrl}>פתיחת חשבון</a>
-            <a class="btn btn-ghost btn-lg" href={loginUrl}>כניסה למערכת</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>איתן — מערכת CRM ליועצי משכנתאות · <a href="https://www.m-eitan.co.il">www.m-eitan.co.il</a></p>
+  <section class="why" id="why">
+    <div class="container why-inner">
+      <p class="kicker">למה איתן</p>
+      <h2>מערכת ניהול שנבנתה על התהליך הישראלי</h2>
+      <div class="why-text">
+        <p>
+          רוב יועצי המשכנתאות מתחילים לנהל את העסק באקסל, בוואטסאפ ובתיקיות מייל — עד שהתיקים
+          מצטברים ומתחילים ליפול דברים בין הכיסאות. <strong>מערכת CRM ליועצי משכנתאות</strong>
+          מרכזת את הכל: כל תיק, כל מסמך, כל משימה וכל שיחה עם הלקוח — במקום אחד, עם תמונה
+          מלאה של סטטוס כל לקוח בכל רגע. למתלבטים, כתבנו מדריך מפורט על
+          <a href="/guides/excel-vs-crm/">ההבדל בין אקסל למערכת ייעודית לניהול תיקי משכנתא</a>.
+        </p>
+        <p>
+          איתן היא <strong>תוכנה לניהול תיקי משכנתא</strong> שנבנתה בישראל, על ידי יועץ
+          משכנתאות פעיל, סביב תהליך העבודה האמיתי מול הבנקים: מהפגישה הראשונה, דרך איסוף
+          מסמכים וייפוי כוח בחתימה דיגיטלית, בניית תמהיל
+          ב<a href="/guides/mortgage-simulator/">סימולטור משכנתא מבוסס נתוני בנק ישראל</a>,
+          ועד אישור סופי וליווי אחרי לקיחת המשכנתא.
+        </p>
+        <p>
+          מחפשים <strong>מערכת ליועצי משכנתאות</strong> ולא בטוחים מה לבדוק? המדריך שלנו על
+          <a href="/guides/choosing-mortgage-crm/">איך בוחרים מערכת CRM ליועץ משכנתאות</a>
+          מרכז את היכולות החשובות, שאלות שכדאי לשאול כל ספק, וטעויות נפוצות בבחירה.
+        </p>
       </div>
-    </footer>
-  </body>
-</html>
+    </div>
+  </section>
 
-<style is:global>
-  :root {
-    --navy-950: #081527;
-    --navy-900: #0b1f3a;
-    --navy-800: #102a4c;
-    --navy-700: #16365f;
-    --blue-500: #2e6fd8;
-    --blue-400: #4a86e8;
-    --ink: #1c2b3f;
-    --muted: #51667f;
-    --bg: #f5f8fc;
-    --card: #ffffff;
-    --line: #dbe5f0;
-  }
+  <section class="guides-teaser">
+    <div class="container">
+      <p class="kicker">מדריכים ליועצי משכנתאות</p>
+      <h2>כדאי לקרוא לפני שבוחרים מערכת</h2>
+      <ul class="card-grid guides-grid">
+        {
+          guides.map((g) => (
+            <li class="card guide-card">
+              <a href={g.href}>
+                <h3>{g.title}</h3>
+                <p>{g.text}</p>
+                <span class="read-more">לקריאת המדריך ←</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  <section class="faq" id="faq">
+    <div class="container">
+      <p class="kicker">שאלות ותשובות</p>
+      <h2>שאלות נפוצות</h2>
+      <div class="faq-list">
+        {
+          faqs.map(({ q, a }, i) => (
+            <details class="faq-item" open={i === 0}>
+              <summary>
+                <span>{q}</span>
+                <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M6 9l6 6 6-6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </summary>
+              <p class="faq-answer">
+                {q === 'איך מתחילים?' ? (
+                  <>
+                    נרשמים בכתובת{' '}
+                    <a href={registerUrl}>www.m-eitan.co.il/register</a>. המערכת פועלת
+                    בדפדפן, ללא התקנה.
+                  </>
+                ) : (
+                  a
+                )}
+              </p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  html {
-    scroll-behavior: smooth;
-  }
+  <CtaPanel />
+</Base>
 
-  body {
-    font-family: 'Heebo', system-ui, -apple-system, sans-serif;
-    color: var(--ink);
-    background: var(--bg);
-    line-height: 1.65;
-  }
-
-  .container {
-    max-width: 1060px;
-    margin-inline: auto;
-    padding-inline: 24px;
-  }
-
-  a {
-    color: var(--blue-500);
-  }
-
-  /* Buttons */
-  .btn {
-    display: inline-block;
-    border-radius: 8px;
-    padding: 10px 22px;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: background-color 0.15s ease, border-color 0.15s ease;
-    border: 1px solid transparent;
-  }
-
-  .btn-lg {
-    padding: 14px 32px;
-    font-size: 1.1rem;
-  }
-
-  .btn-primary {
-    background: var(--blue-500);
-    color: #fff;
-  }
-
-  .btn-primary:hover {
-    background: var(--blue-400);
-  }
-
-  .btn-outline {
-    border-color: var(--line);
-    color: var(--navy-800);
-    background: transparent;
-  }
-
-  .btn-outline:hover {
-    border-color: var(--blue-500);
-    color: var(--blue-500);
-  }
-
-  .btn-ghost {
-    border-color: rgba(255, 255, 255, 0.45);
-    color: #fff;
-    background: transparent;
-  }
-
-  .btn-ghost:hover {
-    border-color: #fff;
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  /* Header */
-  .site-header {
-    background: #fff;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding-block: 14px;
-    flex-wrap: wrap;
-  }
-
-  .brand {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-  }
-
-  .brand-mark {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--navy-900);
-    letter-spacing: -0.02em;
-  }
-
-  .brand-sub {
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  .header-actions {
-    display: flex;
-    gap: 10px;
-  }
-
+<style>
   /* Hero */
   .hero {
-    background: linear-gradient(160deg, var(--navy-950) 0%, var(--navy-900) 55%, var(--navy-800) 100%);
-    color: #fff;
-    padding-block: 88px 96px;
+    position: relative;
+    overflow: hidden;
     text-align: center;
+    padding-block: 84px 92px;
+    background: linear-gradient(180deg, #ffffff 0%, #f2f6fd 60%, var(--bg) 100%);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(600px 300px at 15% 0%, rgba(30, 58, 138, 0.08), transparent 70%),
+      radial-gradient(600px 320px at 85% 10%, rgba(240, 163, 29, 0.12), transparent 70%);
+  }
+
+  .hero-inner {
+    position: relative;
+    animation: rise 0.7s ease-out both;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-inner {
+      animation: none;
+    }
+  }
+
+  :global(.hero-logo) {
+    margin-bottom: 22px;
+    filter: drop-shadow(0 14px 24px rgba(16, 31, 77, 0.18));
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--amber-soft);
+    color: #8a5b06;
+    border: 1px solid #f3ddab;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 999px;
+    padding: 6px 16px;
+    margin-bottom: 22px;
   }
 
   .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.1rem);
-    font-weight: 800;
-    line-height: 1.25;
+    font-size: clamp(2.1rem, 5.2vw, 3.4rem);
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--navy-deep);
     margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero h1 .hl {
+    background-image: linear-gradient(transparent 64%, rgba(240, 163, 29, 0.38) 64%);
   }
 
   .hero-sub {
-    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
-    color: #c6d5ea;
-    max-width: 720px;
+    font-size: clamp(1.05rem, 2.2vw, 1.28rem);
+    color: var(--muted);
+    max-width: 700px;
     margin: 0 auto 36px;
   }
 
-  .cta-row {
+  .trust-chips {
+    list-style: none;
     display: flex;
-    gap: 14px;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 10px 26px;
+    margin-top: 38px;
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+
+  .trust-chips li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .trust-chips svg {
+    width: 16px;
+    height: 16px;
+    color: var(--amber-dark);
+    flex-shrink: 0;
   }
 
   /* Features */
   .features {
-    padding-block: 72px;
+    padding-block: 84px 40px;
   }
 
-  h2 {
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-    font-weight: 700;
-    color: var(--navy-900);
-    margin-bottom: 32px;
-    text-align: center;
-  }
-
-  .feature-grid {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-    gap: 20px;
-  }
-
-  .feature-card {
-    background: var(--card);
-    border: 1px solid var(--line);
+  .feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
     border-radius: 12px;
-    padding: 26px 24px;
+    background: linear-gradient(145deg, #eef3fc, #e3ebf9);
+    color: var(--navy);
+    margin-bottom: 18px;
+  }
+
+  .feature-icon svg {
+    width: 24px;
+    height: 24px;
   }
 
   .feature-card h3 {
-    font-size: 1.1rem;
+    font-size: 1.12rem;
     font-weight: 700;
-    color: var(--navy-800);
+    color: var(--navy-dark);
     margin-bottom: 8px;
   }
 
@@ -396,75 +427,128 @@ const faqPageLd = {
     font-size: 0.97rem;
   }
 
+  /* Why (SEO content) */
+  .why {
+    padding-block: 44px 40px;
+  }
+
+  .why-text {
+    max-width: 760px;
+    margin-inline: auto;
+    font-size: 1.05rem;
+  }
+
+  .why-text p {
+    margin-bottom: 16px;
+  }
+
+  .why-text strong {
+    color: var(--navy-dark);
+  }
+
+  /* Guides teaser */
+  .guides-teaser {
+    padding-block: 44px 40px;
+  }
+
+  .guides-grid {
+    margin-top: 28px;
+  }
+
+  .guide-card {
+    padding: 0;
+  }
+
+  .guide-card a {
+    display: block;
+    padding: 28px 26px;
+    text-decoration: none;
+    height: 100%;
+  }
+
+  .guide-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy-dark);
+    margin-bottom: 8px;
+  }
+
+  .guide-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+
+  .read-more {
+    color: var(--amber-dark);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+
   /* FAQ */
   .faq {
-    padding-block: 24px 72px;
+    padding-block: 44px 84px;
+  }
+
+  .faq h2 {
+    margin-bottom: 32px;
   }
 
   .faq-list {
     max-width: 760px;
     margin-inline: auto;
     display: grid;
-    gap: 16px;
+    gap: 14px;
   }
 
   .faq-item {
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 22px 24px;
+    border-radius: 14px;
+    overflow: hidden;
   }
 
-  .faq-item dt {
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
     font-weight: 700;
-    color: var(--navy-800);
+    color: var(--navy-dark);
     font-size: 1.05rem;
-    margin-bottom: 6px;
   }
 
-  .faq-item dd {
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item .chev {
+    width: 20px;
+    height: 20px;
+    color: var(--amber-dark);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .chev {
+    transform: rotate(180deg);
+  }
+
+  .faq-item[open] summary {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .faq-answer {
+    padding: 16px 22px 20px;
     color: var(--muted);
-  }
-
-  /* Bottom CTA */
-  .bottom-cta {
-    background: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-700) 100%);
-    color: #fff;
-    text-align: center;
-    padding-block: 64px;
-  }
-
-  .bottom-cta h2 {
-    color: #fff;
-    margin-bottom: 12px;
-  }
-
-  .bottom-cta p {
-    color: #c6d5ea;
-    margin-bottom: 28px;
-  }
-
-  /* Footer */
-  .site-footer {
-    background: var(--navy-950);
-    color: #8fa3bd;
-    text-align: center;
-    padding-block: 22px;
-    font-size: 0.9rem;
-  }
-
-  .site-footer a {
-    color: #b9cbe3;
   }
 
   @media (max-width: 560px) {
     .hero {
-      padding-block: 60px 68px;
-    }
-
-    .header-actions {
-      width: 100%;
-      justify-content: center;
+      padding-block: 56px 64px;
     }
   }
 </style>

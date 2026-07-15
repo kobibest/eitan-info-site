@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-124 -4 248 248">
+  <g stroke="#fff" stroke-width="7" stroke-linejoin="round">
+    <!-- top face -->
+    <polygon fill="#1E3A8A" points="0,0 51.96,30 0,60 -51.96,30"/>
+    <polygon fill="#1E3A8A" points="51.96,30 103.92,60 51.96,90 0,60"/>
+    <polygon fill="#1E3A8A" points="-51.96,30 0,60 -51.96,90 -103.92,60"/>
+    <polygon fill="#F0A31D" points="0,60 51.96,90 0,120 -51.96,90"/>
+    <!-- right face -->
+    <polygon fill="#1E3A8A" points="0,120 51.96,90 51.96,150 0,180"/>
+    <polygon fill="#1E3A8A" points="51.96,90 103.92,60 103.92,120 51.96,150"/>
+    <polygon fill="#F0A31D" points="0,180 51.96,150 51.96,210 0,240"/>
+    <polygon fill="#1E3A8A" points="51.96,150 103.92,120 103.92,180 51.96,210"/>
+    <!-- left face -->
+    <polygon fill="#1E3A8A" points="0,120 -51.96,90 -51.96,150 0,180"/>
+    <polygon fill="#1E3A8A" points="-51.96,90 -103.92,60 -103.92,120 -51.96,150"/>
+    <polygon fill="#F0A31D" points="0,180 -51.96,150 -51.96,210 0,240"/>
+    <polygon fill="#1E3A8A" points="-51.96,150 -103.92,120 -103.92,180 -51.96,210"/>
+  </g>
+</svg>

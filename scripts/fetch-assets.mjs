@@ -1,32 +1,41 @@
-// Downloads the site's binary assets (fonts + images) when they are missing.
-// Used by Vercel deployments, where only text source files are uploaded;
-// in a full git checkout every file already exists and this is a no-op.
-// Pinned to the commit that contains the canonical binaries.
+// Syncs the full site source from the public GitHub repo when files are
+// missing. Vercel deployments upload only package.json + this script; the
+// build then pulls everything else (src/, public/, config) from the branch.
+// In a full git checkout every file already exists and this is a no-op.
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
-const REPO_RAW =
-  'https://raw.githubusercontent.com/kobibest/eitan-info-site/6555aaee4d527c5799253896f9d5ac8f146f0b9d';
-
-const ASSETS = [
-  'public/apple-touch-icon.png',
-  'public/og-image.png',
-  'public/fonts/heebo-hebrew.woff2',
-  'public/fonts/heebo-latin.woff2',
-  'public/fonts/heebo-latin-ext.woff2',
-];
+const REPO = 'kobibest/eitan-info-site';
+const REF = 'claude/landing-page-design-6i326j';
 
 const root = join(dirname(new URL(import.meta.url).pathname), '..');
 
-for (const asset of ASSETS) {
-  const target = join(root, asset);
+const treeRes = await fetch(
+  `https://api.github.com/repos/${REPO}/git/trees/${encodeURIComponent(REF)}?recursive=1`,
+  { headers: { accept: 'application/vnd.github+json' } }
+);
+if (!treeRes.ok) {
+  throw new Error(`Failed to list repo tree: ${treeRes.status} ${treeRes.statusText}`);
+}
+const { tree, truncated } = await treeRes.json();
+if (truncated) throw new Error('Repo tree listing was truncated');
+
+const skip = /^(\.|node_modules\/|dist\/|scripts\/|CLAUDE\.md|README\.md|package(-lock)?\.json)/;
+const files = tree.filter((e) => e.type === 'blob' && !skip.test(e.path));
+
+let fetched = 0;
+for (const { path } of files) {
+  const target = join(root, path);
   if (existsSync(target)) continue;
-  const url = `${REPO_RAW}/${asset}`;
-  const res = await fetch(url);
+  const res = await fetch(
+    `https://raw.githubusercontent.com/${REPO}/${encodeURIComponent(REF)}/${path}`
+  );
   if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+    throw new Error(`Failed to fetch ${path}: ${res.status} ${res.statusText}`);
   }
   mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, Buffer.from(await res.arrayBuffer()));
-  console.log(`fetched ${asset}`);
+  fetched++;
+  console.log(`fetched ${path}`);
 }
+console.log(`sync done: ${fetched} fetched, ${files.length - fetched} already present`);

@@ -1,0 +1,35 @@
+---
+const siteUrl = 'https://info.m-eitan.co.il';
+
+export interface Crumb {
+  name: string;
+  href: string;
+}
+
+const { items } = Astro.props as { items: Crumb[] };
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    item: `${siteUrl}${item.href}`,
+  })),
+};
+---
+
+<nav class="breadcrumbs container" aria-label="פירורי לחם">
+  <ol>
+    {
+      items.map((item, i) => (
+        <li>
+          {i < items.length - 1 ? <a href={item.href}>{item.name}</a> : <span>{item.name}</span>}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />

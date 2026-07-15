@@ -1,41 +1,38 @@
-// Syncs the full site source from the public GitHub repo when files are
-// missing. Vercel deployments upload only package.json + this script; the
-// build then pulls everything else (src/, public/, config) from the branch.
-// In a full git checkout every file already exists and this is a no-op.
+// Syncs missing site source files from the public GitHub repo.
+// Vercel deployments upload only package.json + this script; the build then
+// pulls everything else (src/, public/, config) listed in
+// scripts/deploy-manifest.txt on the pinned branch. In a full git checkout
+// every file already exists and this is a no-op.
+// After adding/removing files in the repo, regenerate the manifest:
+//   git ls-files | grep -vE '^(\.|scripts/|CLAUDE\.md|README\.md|package(-lock)?\.json)' > scripts/deploy-manifest.txt
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
 const REPO = 'kobibest/eitan-info-site';
 const REF = 'claude/landing-page-design-6i326j';
+const RAW = `https://raw.githubusercontent.com/${REPO}/${encodeURIComponent(REF)}`;
 
 const root = join(dirname(new URL(import.meta.url).pathname), '..');
 
-const treeRes = await fetch(
-  `https://api.github.com/repos/${REPO}/git/trees/${encodeURIComponent(REF)}?recursive=1`,
-  { headers: { accept: 'application/vnd.github+json' } }
-);
-if (!treeRes.ok) {
-  throw new Error(`Failed to list repo tree: ${treeRes.status} ${treeRes.statusText}`);
+async function fetchOk(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+  return res;
 }
-const { tree, truncated } = await treeRes.json();
-if (truncated) throw new Error('Repo tree listing was truncated');
 
-const skip = /^(\.|node_modules\/|dist\/|scripts\/|CLAUDE\.md|README\.md|package(-lock)?\.json)/;
-const files = tree.filter((e) => e.type === 'blob' && !skip.test(e.path));
+const manifest = (await (await fetchOk(`${RAW}/scripts/deploy-manifest.txt`)).text())
+  .split('\n')
+  .map((l) => l.trim())
+  .filter((l) => l && !l.includes('..'));
 
 let fetched = 0;
-for (const { path } of files) {
+for (const path of manifest) {
   const target = join(root, path);
   if (existsSync(target)) continue;
-  const res = await fetch(
-    `https://raw.githubusercontent.com/${REPO}/${encodeURIComponent(REF)}/${path}`
-  );
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${path}: ${res.status} ${res.statusText}`);
-  }
+  const res = await fetchOk(`${RAW}/${path}`);
   mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, Buffer.from(await res.arrayBuffer()));
   fetched++;
   console.log(`fetched ${path}`);
 }
-console.log(`sync done: ${fetched} fetched, ${files.length - fetched} already present`);
+console.log(`sync done: ${fetched} fetched, ${manifest.length - fetched} already present`);

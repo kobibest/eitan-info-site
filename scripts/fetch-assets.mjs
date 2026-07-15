@@ -10,9 +10,15 @@ import { dirname, join } from 'node:path';
 
 const REPO = 'kobibest/eitan-info-site';
 const REF = 'claude/landing-page-design-6i326j';
-const RAW = `https://raw.githubusercontent.com/${REPO}/${encodeURIComponent(REF)}`;
+const RAW = `https://raw.githubusercontent.com/${REPO}/${REF}`;
 
 const root = join(dirname(new URL(import.meta.url).pathname), '..');
+
+// Full git checkout — everything is already on disk, skip the network entirely.
+if (existsSync(join(root, 'src/pages/index.astro')) && existsSync(join(root, '.git'))) {
+  console.log('sync skipped: full checkout detected');
+  process.exit(0);
+}
 
 async function fetchOk(url) {
   const res = await fetch(url);

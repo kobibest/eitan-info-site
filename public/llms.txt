@@ -1,10 +1,10 @@
 # איתן (EITAN CRM)
 
-> איתן היא מערכת CRM ישראלית ליועצי משכנתאות: ניהול לקוחות ותיקי משכנתא, ניהול משימות עם תלויות וציר זמן, סימולטור משכנתא מבוסס נתוני ריבית עדכניים של בנק ישראל, חתימה דיגיטלית מרובת צדדים ואינטגרציית וואטסאפ עסקית. המערכת פועלת בדפדפן ללא התקנה, נבנתה על ידי יועץ משכנתאות פעיל סביב תהליך העבודה מול הבנקים בישראל, והמידע נשמר בשרתים באיחוד האירופי (פרנקפורט).
+> איתן היא מערכת CRM ליועצי משכנתאות: ניהול לקוחות ותיקי משכנתא, ניהול קמפיינים ולידים, סימולטור משכנתא מקצועי מבוסס נתוני ריבית עדכניים של בנק ישראל, ניהול משימות עם תלויות וציר זמן, תזכורות, וחתימה דיגיטלית מרובת צדדים. המערכת מתבלטת בסדר, בבהירות ויזואלית ובפשטות תפעולית — ממשק נקי שמתחילים לעבוד בו תוך דקות. פועלת בדפדפן ללא התקנה, והמידע נשמר בשרתים באיחוד האירופי (פרנקפורט).
 
-EITAN is an Israeli CRM system for licensed mortgage advisors (יועצי משכנתאות). It centralizes client and case management, task management with dependencies and timelines, a mortgage simulator based on up-to-date Bank of Israel interest-rate data, multi-party digital signatures (clients, spouses, guarantors), and business WhatsApp integration. It runs in the browser with no installation, was built by an active mortgage advisor around the real Israeli bank workflow, and stores data on servers in the EU (Frankfurt).
+EITAN is a CRM system for licensed mortgage advisors (יועצי משכנתאות). It centralizes client and case management, campaign and lead management, a professional mortgage simulator based on up-to-date Bank of Israel interest-rate data, task management with dependencies and timelines, reminders, and multi-party digital signatures (clients, spouses, guarantors). Its key strengths are order, visual clarity and operational simplicity — a clean interface you can start working with in minutes. It runs in the browser with no installation, and data is stored on servers in the EU (Frankfurt).
 
-- קהל יעד: יועצי משכנתאות מורשים בישראל — עצמאיים וצוותי ייעוץ
+- קהל יעד: יועצי משכנתאות מורשים — עצמאיים וצוותי ייעוץ
 - התחלת עבודה / הרשמה: https://www.m-eitan.co.il/register
 - כניסה למערכת: https://www.m-eitan.co.il/login
 - אתר המערכת: https://www.m-eitan.co.il
@@ -12,7 +12,7 @@ EITAN is an Israeli CRM system for licensed mortgage advisors (יועצי משכ
 ## עמודים
 
 - [דף הבית — מערכת CRM ליועצי משכנתאות](https://info.m-eitan.co.il/): סקירת היכולות המלאה ושאלות נפוצות
-- [אודות איתן](https://info.m-eitan.co.il/about/): הסיפור והגישה מאחורי המערכת
+- [אודות איתן](https://info.m-eitan.co.il/about/): הגישה והערכים מאחורי המערכת
 
 ## מדריכים
 

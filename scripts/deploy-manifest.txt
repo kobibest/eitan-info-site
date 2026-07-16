@@ -1,5 +1,6 @@
 astro.config.mjs
 public/apple-touch-icon.png
+public/favicon-96.png
 public/favicon.svg
 public/fonts/heebo-hebrew.woff2
 public/fonts/heebo-latin-ext.woff2
